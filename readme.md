@@ -12,8 +12,10 @@ LeituraPDF/
 ├── main.py                      # Arquivo principal para execução
 ├── exporters/                   # Estratégias de exportação (Strategy Pattern)
 │   ├── __init__.py              # Fábrica de exportadores
+│   ├── adobe_pdf.py             # Exportação em PDF (.pdf)
 │   ├── base.py                  # Interface abstrata (Exporter)
 │   ├── excel_xlsx.py            # Exportação em Excel (.xlsx)
+│   ├── web_html.py              # Exportação em HTML (.html)
 │   └── word_docx.py             # Exportação em Word (.docx)
 ├── builder.py                   # Responsável por montar o DataFrame
 ├── extractor.py                 # Leitura e parsing do PDF (usando regex)
