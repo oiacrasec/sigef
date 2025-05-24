@@ -1,22 +1,28 @@
-import pandas as pd
-from docx import Document
 from .base import Exporter
+from docx import Document
+import pandas as pd
+
 
 class WordExporter(Exporter):
     def export(self, dataframe: pd.DataFrame, output_path: str):
         doc = Document()
-        doc.add_heading("Tabela do Memorial SIGEF", 0)
+        doc.add_heading("Tabela do Memorial SIGEF", level=1)
 
-        table = doc.add_table(rows=1, cols=len(dataframe.columns))
-        table.style = 'Table Grid'
-
-        for i, column in enumerate(dataframe.columns):
-            table.rows[0].cells[i].text = column
-
+        registros_texto = []
         for _, row in dataframe.iterrows():
-            row_cells = table.add_row().cells
-            for i, value in enumerate(row):
-                row_cells[i].text = str(value)
+            linha = (
+                f"Vértice: {row['Vértice']}, "
+                f"Longitude: {row['Longitude']}, "
+                f"Latitude: {row['Latitude']}, "
+                f"Altitude (m): {row['Altitude (m)']}, "
+                f"Vante: {row['Vante']}, "
+                f"Azimute: {row['Azimute']}, "
+                f"Distância (m): {row['Distância (m)']}, "
+                f"Confrontações: {row['Confrontações']}"
+            )
+            registros_texto.append(linha)
 
+        corpo_final = "; ".join(registros_texto) + ";"
+        doc.add_paragraph(corpo_final)
         doc.save(output_path)
         print(f"📄 Word salvo em: {output_path}")

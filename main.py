@@ -5,7 +5,7 @@ from exporters import ExporterFactory
 
 def main():
     caminho_pdf = "exemplos-entrada/MEMORIAL SIGEF GLEBA 01 - 222,7794ha.pdf"
-    formato_saida = HTML  # Tipos no arquivo constants.py
+    formato_saida = WORD  # Tipos no arquivo constants.py
 
     extensao = EXTENSOES.get(formato_saida, EXCEL)
     caminho_saida = f"exemplos-saida/memorial_sigef.{extensao}"
